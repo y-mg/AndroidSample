@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MVVM</string>
+
+    <string name="menu_item_api">API</string>
+    <string name="menu_item_local">Local</string>
+
+    <string name="activity_main_edit_search_hint">검색어를 입력해주세요.</string>
+
+    <string name="state_empty_view_label">검색 결과가 없습니다.</string>
+    <string name="state_error_view_label">ERROR!!!</string>
+    <string name="state_null_view_label">데이터가 없습니다.</string>
+</resources>

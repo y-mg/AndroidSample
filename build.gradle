@@ -1,0 +1,71 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext.kotlin_version = "1.4.21"
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.1.1"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    // Material Design
+    material_version = '1.2.1'
+
+    // RecyclerView
+    recyclerview_version = '1.1.0'
+
+    // MultiStateView
+    multi_state_view_version = '2.1.2'
+
+    // Koin
+    koin_version = '2.0.1'
+
+    // Retrofit2
+    retrofit2_version = '2.7.1'
+
+    // Okhttp3
+    okhttp3_version = '4.3.0'
+
+    // Gson
+    gson_version = '2.8.6'
+
+    // RxAndroid
+    rxandroid_version = '2.1.1'
+
+    // RxJava
+    rxjava_version = '2.2.14'
+
+    // RxBinding
+    rxbinding_version = '4.0.0'
+
+    // AAC
+    aac_version = '2.2.0'
+
+    // Logger
+    logger_version = '2.2.0'
+
+    // Glide
+    glide_version = '4.11.0'
+}

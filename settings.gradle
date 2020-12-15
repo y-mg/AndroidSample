@@ -1,0 +1,4 @@
+include ':mvvm'
+include ':room'
+include ':app'
+rootProject.name = "AndroidSample"
