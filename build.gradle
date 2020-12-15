@@ -68,4 +68,10 @@ ext {
 
     // Glide
     glide_version = '4.11.0'
+
+    // Paging
+    paging_version = '2.1.2'
+
+    // Navigation Component
+    navigation_version = '2.3.2'
 }

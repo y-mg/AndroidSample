@@ -16,7 +16,7 @@ data class SearchModel(
     var items: List<Items>
 ) {
     data class Items(
-        //* 좋아요 체크 여부
+        // 좋아요 체크 여부
         @SerializedName("isCheckGood")
         var isCheckGood: Boolean = false,
 

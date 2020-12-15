@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="filter">
+        <item>@string/spinner_filter_accuracy</item>
+        <item>@string/spinner_filter_recency</item>
+    </string-array>
+</resources>

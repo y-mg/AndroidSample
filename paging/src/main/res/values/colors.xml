@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- White -->
+    <color name="white_ffffff">#ffffff</color>
+
+    <!-- Black -->
+    <color name="black_000000">#000000</color>
+
+    <!-- Gray -->
+    <color name="gray_6f7377">#6f7377</color>
+    <color name="gray_aeb7bf">#aeb7bf</color>
+    <color name="gray_eeeeee">#eeeeee</color>
+
+    <!-- Yellow -->
+    <color name="yellow_fae023">#fae023</color>
+
+</resources>
