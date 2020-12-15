@@ -4,7 +4,7 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.ymg.android.paging.R
-import com.ymg.android.paging.data.network.kakao.response.book.BookModel
+import com.ymg.android.paging.network.response.BookModel
 
 
 

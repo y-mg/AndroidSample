@@ -1,7 +1,7 @@
 package com.ymg.android.paging.ui.vm.paging
 
 import androidx.paging.PageKeyedDataSource
-import com.ymg.android.paging.data.network.kakao.response.book.BookModel
+import com.ymg.android.paging.network.response.BookModel
 import com.ymg.android.paging.ui.vm.SharedViewModel
 import com.ymg.android.paging.ui.sub.search.SearchNavigator
 import com.ymg.android.paging.util.event.Event

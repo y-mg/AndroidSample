@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.ymg.android.paging.data.network.kakao.KakaoClient
-import com.ymg.android.paging.data.network.kakao.response.book.BookModel
+import com.ymg.android.paging.network.KakaoClient
+import com.ymg.android.paging.network.response.BookModel
 import com.ymg.android.paging.base.BaseViewModel
 import com.ymg.android.paging.ui.sub.search.SearchNavigator
 import com.ymg.android.paging.ui.vm.paging.PagingFactory

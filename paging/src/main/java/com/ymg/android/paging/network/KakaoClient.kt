@@ -1,8 +1,8 @@
-package com.ymg.android.paging.data.network.kakao
+package com.ymg.android.paging.network
 
 import com.ymg.android.paging.BuildConfig
-import com.ymg.android.paging.data.network.kakao.api.BookApi
-import com.ymg.android.paging.data.network.kakao.response.book.BookModel
+import com.ymg.android.paging.network.api.BookApi
+import com.ymg.android.paging.network.response.BookModel
 import io.reactivex.Observable
 
 

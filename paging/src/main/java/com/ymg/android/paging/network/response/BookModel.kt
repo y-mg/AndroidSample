@@ -1,7 +1,9 @@
-package com.ymg.android.paging.data.network.kakao.response.book
+package com.ymg.android.paging.network.response
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
+
+
 
 data class BookModel(
     @SerializedName("documents")

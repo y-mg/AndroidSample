@@ -1,6 +1,6 @@
-package com.ymg.android.paging.data.network.kakao.api
+package com.ymg.android.paging.network.api
 
-import com.ymg.android.paging.data.network.kakao.response.book.BookModel
+import com.ymg.android.paging.network.response.BookModel
 import io.reactivex.Observable
 import retrofit2.http.*
 

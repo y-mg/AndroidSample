@@ -10,7 +10,7 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.ymg.android.paging.R
-import com.ymg.android.paging.data.network.kakao.response.book.BookModel
+import com.ymg.android.paging.network.response.BookModel
 import com.ymg.android.paging.ui.vm.SharedViewModel
 
 

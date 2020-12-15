@@ -9,11 +9,12 @@
 
         <variable
             name="document"
-            type="com.ymg.android.paging.data.network.kakao.response.book.BookModel.Document" />
+            type="com.ymg.android.paging.network.response.BookModel.Document" />
         <variable
             name="viewModel"
             type="com.ymg.android.paging.ui.vm.SharedViewModel" />
     </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

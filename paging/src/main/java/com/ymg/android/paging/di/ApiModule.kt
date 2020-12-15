@@ -1,8 +1,8 @@
 package com.ymg.android.paging.di
 
 import com.ymg.android.paging.BuildConfig
-import com.ymg.android.paging.data.network.kakao.KakaoClient
-import com.ymg.android.paging.data.network.kakao.api.BookApi
+import com.ymg.android.paging.network.KakaoClient
+import com.ymg.android.paging.network.api.BookApi
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit

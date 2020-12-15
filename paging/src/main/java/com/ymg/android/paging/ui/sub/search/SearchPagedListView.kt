@@ -8,7 +8,7 @@ import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.ymg.android.paging.data.network.kakao.response.book.BookModel
+import com.ymg.android.paging.network.response.BookModel
 import com.ymg.android.paging.databinding.FragmentSearchItemBinding
 import com.ymg.android.paging.ui.vm.SharedViewModel
 
