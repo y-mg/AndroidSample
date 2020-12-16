@@ -12,8 +12,8 @@
 
 ### Room Component 구성 요소
 <img width="500" src="/room/sample/component.png">
-- Entity: DB 안에 있는 테이블을 Java/Kotlin 클래스로 나타낸 것으로, 데이터 모델 클래스라고 볼 수 있다.
-- DAO(Database Access Object): DB 에 접근해서 실질적으로 insert, delete 등을 수행하는 메소드를 포함한다.
+- Entity: DB 안에 있는 테이블을 Java/Kotlin 클래스로 나타낸 것으로, 데이터 모델 클래스라고 볼 수 있다.<br/>
+- DAO(Database Access Object): DB 에 접근해서 실질적으로 insert, delete 등을 수행하는 메소드를 포함한다.<br/>
 - Database: Database Holder 를 포함하며, 앱에 영구 저장되는 데이터와 기본 연결을 위한 주 엑세스 지점이다. 또한 RoomDatabase 를 상속하는 추상 클래스여야 하며, 테이블과 버전을 정의하는 곳이다.
 <br/>
 <br/>
