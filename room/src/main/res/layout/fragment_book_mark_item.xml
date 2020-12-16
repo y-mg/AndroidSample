@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.graphics.Color"/>
+
+        <variable
+            name="bookMark"
+            type="com.ymg.android.room.data.db.entity.BookMark" />
+        <variable
+            name="viewModel"
+            type="com.ymg.android.room.ui.share.SharedViewModel" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/bookItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/bookImage"
+                    android:layout_width="60dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:setBindImage="@{bookMark.thumbnail}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/bookName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@{bookMark.title}"
+                    android:textColor="@color/black_000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/bookPrice"
+                    app:layout_constraintEnd_toStartOf="@+id/btnDelete"
+                    app:layout_constraintStart_toEndOf="@+id/bookImage"
+                    app:layout_constraintTop_toTopOf="@+id/bookImage"
+                    tools:text="여기는 책 이름입니다.여기는 책 이름입니다." />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/bookPrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:maxLength="10"
+                    android:textColor="@color/black_000000"
+                    android:textSize="12sp"
+                    app:setBindMoney="@{bookMark.price}"
+                    app:layout_constraintBottom_toTopOf="@+id/bookDate"
+                    app:layout_constraintEnd_toStartOf="@+id/btnDelete"
+                    app:layout_constraintStart_toStartOf="@+id/bookName"
+                    app:layout_constraintTop_toBottomOf="@+id/bookName"
+                    tools:text="50,000" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/bookDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:maxLength="10"
+                    android:text="@{bookMark.dateTime}"
+                    android:textColor="@color/black_000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/bookImage"
+                    app:layout_constraintEnd_toStartOf="@+id/btnDelete"
+                    app:layout_constraintStart_toStartOf="@+id/bookName"
+                    app:layout_constraintTop_toBottomOf="@+id/bookPrice"
+                    tools:text="2020-01-01" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btnDelete"
+                    android:onClick="@{() -> viewModel.onDeleteBookMark(bookMark)}"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@null"
+                    android:src="@drawable/icon_empty"
+                    android:tint="@color/black_000000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/bookName"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

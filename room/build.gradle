@@ -16,6 +16,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "URL", '"https://dapi.kakao.com"')
+        buildConfigField("String", "API_KEY", '"9d3f4bc6651d0f0395ba8e205456611a"')
+        buildConfigField("String", "SCOPE", '"KAKAO"')
     }
 
     buildTypes {
