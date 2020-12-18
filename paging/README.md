@@ -1,5 +1,5 @@
 # Paging
-<img width="250px" height="500px" src="/room/sample/sample.gif" />
+<img width="250px" height="500px" src="/paging/sample/sample.gif" />
 <br/>
 <br/>
 
@@ -11,7 +11,7 @@
 
 
 ### Paging 구성 요소
-<img width="500" src="/room/sample/component.png">
+<img width="500" src="/paging/sample/component.png">
 
 - DataSource
     - 데이터를 로드하는 역할로, 데이터를 정해진 범위만 불러온 뒤 PagedList 로 로드하는 객체이다.
