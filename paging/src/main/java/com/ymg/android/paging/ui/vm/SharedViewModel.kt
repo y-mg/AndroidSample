@@ -8,7 +8,7 @@ import com.ymg.android.paging.network.KakaoClient
 import com.ymg.android.paging.network.response.BookModel
 import com.ymg.android.paging.base.BaseViewModel
 import com.ymg.android.paging.ui.sub.search.SearchNavigator
-import com.ymg.android.paging.ui.vm.paging.PagingFactory
+import com.ymg.android.paging.ui.sub.search.paging.SearchFactory
 import com.ymg.android.paging.util.event.Event
 
 
@@ -18,9 +18,8 @@ class SharedViewModel(
 ) : BaseViewModel() {
 
     val searchNavigator = MutableLiveData<Event<SearchNavigator>>()
-    var errorNavigator = MutableLiveData<Event<String?>>()
 
-    private val pagingFactory = PagingFactory(this)
+    private val pagingFactory = SearchFactory(this)
 
     // 도서 정보
     private var _bookItems: LiveData<PagedList<BookModel.Document>>? = null
@@ -60,6 +59,7 @@ class SharedViewModel(
 
     // 책 검색 시작
     fun onStartSearch() {
+        searchNavigator.postValue(Event(SearchNavigator.CHANGE_STATE_CONTENT))
         _bookItems?.value?.dataSource?.invalidate()
     }
 }

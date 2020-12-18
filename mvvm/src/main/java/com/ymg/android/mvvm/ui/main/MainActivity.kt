@@ -1,25 +1,25 @@
 package com.ymg.android.mvvm.ui.main
 
-import android.view.MenuItem
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.os.Bundle
+import androidx.lifecycle.LiveData
+import androidx.navigation.NavController
 import com.jakewharton.rxbinding4.widget.textChanges
 import com.ymg.android.mvvm.R
 import com.ymg.android.mvvm.BR
 import com.ymg.android.mvvm.base.BaseActivity
 import com.ymg.android.mvvm.databinding.ActivityMainBinding
-import com.ymg.android.mvvm.ui.api.ApiFragment
-import com.ymg.android.mvvm.ui.local.LocalFragment
 import com.ymg.android.mvvm.ui.share.SharedViewModel
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import com.ymg.android.mvvm.util.nav.setupWithNavController
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
 
 
 
-class MainActivity : BaseActivity<ActivityMainBinding, SharedViewModel>(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity<ActivityMainBinding, SharedViewModel>() {
 
     private val sharedViewModel: SharedViewModel by viewModel()
+
+    private var currentNavController: LiveData<NavController>? = null
 
 
 
@@ -35,35 +35,40 @@ class MainActivity : BaseActivity<ActivityMainBinding, SharedViewModel>(), Botto
         return sharedViewModel
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (savedInstanceState == null) {
+            setBottomNavigationBar()
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        setBottomNavigationBar()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return currentNavController?.value?.navigateUp() ?: false
+    }
+
     override fun bindView() {
         getViewDataBinding().view = this
         observe()
-
-        getViewDataBinding().navigation.setOnNavigationItemSelectedListener(this)
-        supportFragmentManager.beginTransaction()
-            .add(getViewDataBinding().container.id, ApiFragment()).commit()
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.api -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(getViewDataBinding().container.id, ApiFragment())
-                    .commitAllowingStateLoss()
-                return true
-            }
 
-            R.id.local -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(getViewDataBinding().container.id, LocalFragment())
-                    .commitAllowingStateLoss()
-                return true
-            }
 
-            else -> {
-                return false
-            }
-        }
+    private fun setBottomNavigationBar() {
+        val navGraphIds = listOf(R.navigation.nav_api, R.navigation.nav_local)
+
+        val controller = getViewDataBinding().bottomNavigationView.setupWithNavController(
+            navGraphIds = navGraphIds,
+            fragmentManager = supportFragmentManager,
+            containerId = getViewDataBinding().fragmentContainerView.id,
+            intent = intent
+        )
+        currentNavController = controller
     }
 
 
@@ -74,17 +79,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, SharedViewModel>(), Botto
             .map {
                 it.toString()
             }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 if (it.isNotEmpty()) {
                     sharedViewModel.fetchSearchUsers(it)
                 } else {
-                    sharedViewModel.apply {
-                        userItems.value = arrayListOf()
-                        goods.clear()
-                        goodItems.value = arrayListOf()
-                    }
+                    sharedViewModel.initialization()
                 }
             }
     }

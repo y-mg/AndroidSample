@@ -1,24 +1,25 @@
 package com.ymg.android.room.ui.main
 
-import android.view.MenuItem
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.os.Bundle
+import androidx.lifecycle.LiveData
+import androidx.navigation.NavController
 import com.jakewharton.rxbinding4.widget.textChanges
 import com.ymg.android.room.R
 import com.ymg.android.room.BR
 import com.ymg.android.room.base.BaseActivity
 import com.ymg.android.room.databinding.ActivityMainBinding
-import com.ymg.android.room.ui.bookmark.BookMarkFragment
-import com.ymg.android.room.ui.search.SearchFragment
 import com.ymg.android.room.ui.share.SharedViewModel
-import io.reactivex.rxjava3.schedulers.Schedulers
+import com.ymg.android.room.util.nav.setupWithNavController
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
 
 
 
-class MainActivity : BaseActivity<ActivityMainBinding, SharedViewModel>(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity<ActivityMainBinding, SharedViewModel>() {
 
     private val sharedViewModel: SharedViewModel by viewModel()
+
+    private var currentNavController: LiveData<NavController>? = null
 
 
 
@@ -34,35 +35,40 @@ class MainActivity : BaseActivity<ActivityMainBinding, SharedViewModel>(), Botto
         return sharedViewModel
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (savedInstanceState == null) {
+            setBottomNavigationBar()
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        setBottomNavigationBar()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return currentNavController?.value?.navigateUp() ?: false
+    }
+
     override fun bindView() {
         getViewDataBinding().view = this
         observe()
-
-        getViewDataBinding().navigation.setOnNavigationItemSelectedListener(this)
-        supportFragmentManager.beginTransaction()
-            .add(getViewDataBinding().container.id, SearchFragment()).commit()
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.search -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(getViewDataBinding().container.id, SearchFragment())
-                    .commitAllowingStateLoss()
-                return true
-            }
 
-            R.id.bookMark -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(getViewDataBinding().container.id, BookMarkFragment())
-                    .commitAllowingStateLoss()
-                return true
-            }
 
-            else -> {
-                return false
-            }
-        }
+    private fun setBottomNavigationBar() {
+        val navGraphIds = listOf(R.navigation.nav_search, R.navigation.nav_book_mark)
+
+        val controller = getViewDataBinding().bottomNavigationView.setupWithNavController(
+            navGraphIds = navGraphIds,
+            fragmentManager = supportFragmentManager,
+            containerId = getViewDataBinding().fragmentContainerView.id,
+            intent = intent
+        )
+        currentNavController = controller
     }
 
 
@@ -73,7 +79,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, SharedViewModel>(), Botto
             .map {
                 it.toString()
             }
-            .subscribeOn(Schedulers.io())
             .subscribe {
                 sharedViewModel.onStartSearch()
             }

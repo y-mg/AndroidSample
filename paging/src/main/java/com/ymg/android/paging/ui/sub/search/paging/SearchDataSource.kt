@@ -1,4 +1,4 @@
-package com.ymg.android.paging.ui.vm.paging
+package com.ymg.android.paging.ui.sub.search.paging
 
 import androidx.paging.PageKeyedDataSource
 import com.ymg.android.paging.network.response.BookModel
@@ -10,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
 
 
 
-class PagingDataSource(
+class SearchDataSource(
     private var sharedViewModel: SharedViewModel
 ) : PageKeyedDataSource<Int, BookModel.Document>() {
 
@@ -37,15 +37,15 @@ class PagingDataSource(
                     sharedViewModel.searchNavigator.postValue(Event(SearchNavigator.CHANGE_STATE_LOADING))
                 }
                 .doOnError {
-                    sharedViewModel.errorNavigator.postValue(Event(it.message))
+                    sharedViewModel.searchNavigator.value = Event(SearchNavigator.CHANGE_STATE_ERROR)
                 }
                 .subscribe {
                     it?.documents?.let { document ->
                         if (document.isNotEmpty()) {
                             callback.onResult(document, null, nextPageNumber)
-                            sharedViewModel.searchNavigator.postValue(Event(SearchNavigator.CHANGE_STATE_CONTENT))
+                            sharedViewModel.searchNavigator.value = Event(SearchNavigator.CHANGE_STATE_CONTENT)
                         } else {
-                            sharedViewModel.searchNavigator.postValue(Event(SearchNavigator.CHANGE_STATE_EMPTY))
+                            sharedViewModel.searchNavigator.value = Event(SearchNavigator.CHANGE_STATE_EMPTY)
                         }
                     }
                 }
@@ -70,7 +70,7 @@ class PagingDataSource(
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnError {
-                        sharedViewModel.errorNavigator.postValue(Event(it.message))
+                        sharedViewModel.searchNavigator.value = Event(SearchNavigator.CHANGE_STATE_ERROR)
                     }
                     .subscribe {
                         it?.documents?.let { document ->

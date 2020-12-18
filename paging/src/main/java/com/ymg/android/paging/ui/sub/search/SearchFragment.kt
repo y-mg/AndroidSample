@@ -1,16 +1,13 @@
 package com.ymg.android.paging.ui.sub.search
 
-import androidx.appcompat.widget.AppCompatTextView
 import com.jakewharton.rxbinding4.widget.textChanges
 import com.kennyc.view.MultiStateView
 import com.ymg.android.paging.R
 import com.ymg.android.paging.BR
 import com.ymg.android.paging.databinding.FragmentSearchBinding
-import com.ymg.android.paging.databinding.StateErrorViewBinding
 import com.ymg.android.paging.base.BaseFragment
 import com.ymg.android.paging.ui.vm.SharedViewModel
 import com.ymg.android.paging.util.event.EventObserver
-import io.reactivex.rxjava3.schedulers.Schedulers
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.concurrent.TimeUnit
 
@@ -60,19 +57,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SharedViewModel>() {
                     getViewDataBinding().stateView.viewState = MultiStateView.ViewState.EMPTY
                 }
 
+                // 에러 표시
+                SearchNavigator.CHANGE_STATE_ERROR -> {
+                    getViewDataBinding().stateView.viewState = MultiStateView.ViewState.ERROR
+                }
+
                 else -> Unit
             }
-        })
-
-
-        sharedViewModel.errorNavigator.observe(this, EventObserver {
-            if (!it.isNullOrEmpty()) {
-                val errorLabel: AppCompatTextView = StateErrorViewBinding.inflate(layoutInflater).errorLabel
-                errorLabel.text = it
-            }
-
-            // 에러 표시
-            getViewDataBinding().stateView.viewState = MultiStateView.ViewState.ERROR
         })
 
 
@@ -84,7 +75,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SharedViewModel>() {
             .filter {
                 it != checkQuery
             }
-            .subscribeOn(Schedulers.io())
             .subscribe {
                 sharedViewModel.onStartSearch()
                 checkQuery = it

@@ -25,7 +25,6 @@ class SharedViewModel(
 ) : BaseViewModel() {
 
     val searchNavigator = MutableLiveData<Event<SearchNavigator>>()
-    var errorNavigator = MutableLiveData<Event<String?>>()
     val bookMarkNavigator = MutableLiveData<Event<BookMarkNavigator>>()
 
     private val searchFactory = SearchFactory(this)
@@ -61,6 +60,7 @@ class SharedViewModel(
 
     // 책 검색 시작
     fun onStartSearch() {
+        searchNavigator.postValue(Event(SearchNavigator.CHANGE_STATE_CONTENT))
         _bookItems?.value?.dataSource?.invalidate()
     }
 
@@ -75,10 +75,10 @@ class SharedViewModel(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError {
-                    searchNavigator.postValue(Event(SearchNavigator.SAVE_FAIL))
+                    searchNavigator.value = Event(SearchNavigator.SAVE_FAIL)
                 }
                 .subscribe {
-                    searchNavigator.postValue(Event(SearchNavigator.SAVE_SUCCESS))
+                    searchNavigator.value = Event(SearchNavigator.SAVE_SUCCESS)
                 }
         )
     }
@@ -94,10 +94,10 @@ class SharedViewModel(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError {
-                    bookMarkNavigator.postValue(Event(BookMarkNavigator.DELETE_FAIL))
+                    bookMarkNavigator.value = Event(BookMarkNavigator.DELETE_FAIL)
                 }
                 .subscribe {
-                    bookMarkNavigator.postValue(Event(BookMarkNavigator.DELETE_SUCCESS))
+                    bookMarkNavigator.value = Event(BookMarkNavigator.DELETE_SUCCESS)
                 }
         )
     }

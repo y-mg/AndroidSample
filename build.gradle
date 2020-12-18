@@ -76,5 +76,5 @@ ext {
     navigation_version = '2.3.2'
 
     // Room
-    room_version = '2.2.5'
+    room_version = '2.2.6'
 }

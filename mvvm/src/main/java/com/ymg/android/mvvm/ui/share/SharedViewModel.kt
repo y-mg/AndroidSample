@@ -17,7 +17,6 @@ class SharedViewModel(
 
     // Navigator
     val apiNavigator = MutableLiveData<Event<ApiNavigator>>()
-    var errorNavigator = MutableLiveData<Event<String?>>()
 
     // User Items
     var userItems = MutableLiveData<List<SearchModel.Items>>().apply { value = arrayListOf() }
@@ -43,18 +42,28 @@ class SharedViewModel(
                 apiNavigator.postValue(Event(ApiNavigator.CHANGE_STATE_LOADING))
             }
             .doOnError {
-                errorNavigator.postValue(Event(it.message))
+                apiNavigator.value = Event(ApiNavigator.CHANGE_STATE_ERROR)
             }
             .subscribe {
                 it?.items?.let { item ->
                     if (item.isNotEmpty()) {
                         userItems.value = it.items
-                        apiNavigator.postValue(Event(ApiNavigator.CHANGE_STATE_CONTENT))
+                        apiNavigator.value = Event(ApiNavigator.CHANGE_STATE_CONTENT)
                     } else {
-                        apiNavigator.postValue(Event(ApiNavigator.CHANGE_STATE_EMPTY))
+                        apiNavigator.value = Event(ApiNavigator.CHANGE_STATE_EMPTY)
                     }
                 }
             }
         )
+    }
+
+
+
+    // 초기화
+    fun initialization() {
+        userItems.postValue(arrayListOf())
+        goods.clear()
+        goodItems.postValue(arrayListOf())
+        apiNavigator.postValue(Event(ApiNavigator.CHANGE_STATE_CONTENT))
     }
 }

@@ -1,4 +1,4 @@
-package com.ymg.android.paging.ui.vm.paging
+package com.ymg.android.paging.ui.sub.search.paging
 
 import androidx.paging.DataSource
 import com.ymg.android.paging.network.response.BookModel
@@ -6,14 +6,14 @@ import com.ymg.android.paging.ui.vm.SharedViewModel
 
 
 
-class PagingFactory(
+class SearchFactory(
     private var sharedViewModel: SharedViewModel
 ): DataSource.Factory<Int, BookModel.Document>() {
 
-    private var pagingDataSource: PagingDataSource? = null
+    private var searchDataSource: SearchDataSource? = null
 
     override fun create(): DataSource<Int, BookModel.Document> {
-        pagingDataSource = PagingDataSource(sharedViewModel)
-        return pagingDataSource!!
+        searchDataSource = SearchDataSource(sharedViewModel)
+        return searchDataSource!!
     }
 }

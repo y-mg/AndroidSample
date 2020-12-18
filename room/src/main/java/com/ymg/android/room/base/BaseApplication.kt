@@ -1,6 +1,7 @@
 package com.ymg.android.room.base
 
 import android.app.Application
+import android.widget.Toast
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
@@ -51,6 +52,7 @@ class BaseApplication : Application() {
          * RxError Handler
          */
         RxJavaPlugins.setErrorHandler {
+            Toast.makeText(applicationContext, it.localizedMessage ?: "ERROR", Toast.LENGTH_LONG).show()
             Logger.e("RxErrorHandler: $it")
         }
     }

@@ -7,5 +7,5 @@
     <string name="fragment_search_edit_search_hint">검색할 책을 입력해주세요.</string>
     <string name="fragment_search_currency_label">원</string>
     <string name="fragment_search_state_empty_label">검색 결과가 없습니다.</string>
-    <string name="fragment_search_state_error_label">ERROR!!!</string>
+    <string name="fragment_search_state_error_label">ERROR</string>
 </resources>

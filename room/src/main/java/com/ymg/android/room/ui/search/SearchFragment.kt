@@ -57,6 +57,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SharedViewModel>() {
                     getViewDataBinding().stateView.viewState = MultiStateView.ViewState.EMPTY
                 }
 
+                // 에러 표시
+                SearchNavigator.CHANGE_STATE_ERROR -> {
+                    getViewDataBinding().stateView.viewState = MultiStateView.ViewState.ERROR
+                }
+
                 // 저장 완료
                 SearchNavigator.SAVE_SUCCESS -> {
                     Toast.makeText(
@@ -77,16 +82,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SharedViewModel>() {
 
                 else -> Unit
             }
-        })
-
-        sharedViewModel.errorNavigator.observe(this, EventObserver {
-            if (!it.isNullOrEmpty()) {
-                val errorLabel: AppCompatTextView = StateErrorViewBinding.inflate(layoutInflater).errorLabel
-                errorLabel.text = it
-            }
-
-            // 에러 표시
-            getViewDataBinding().stateView.viewState = MultiStateView.ViewState.ERROR
         })
     }
 }
