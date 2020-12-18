@@ -1,4 +1,4 @@
-# Android Room
+# Room
 <img width="250px" height="500px" src="/room/sample/sample.gif" />
 <br/>
 <br/>
@@ -10,11 +10,14 @@
 > Room 은 SQLite 의 추상 레이어를 제공하여 SQLite 의 객체를 매핑하는 역할을 하는데, 쉽게 말하면 SQLite 의 기능을 모두 사용할 수 있고, DB 로의 접근을 편하게 도와주는 라이브러리이다.
 
 
-### Room Component 구성 요소
+### Room 구성 요소
 <img width="500" src="/room/sample/component.png">
-- Entity: DB 안에 있는 테이블을 Java/Kotlin 클래스로 나타낸 것으로, 데이터 모델 클래스라고 볼 수 있다.<br/>
-- DAO(Database Access Object): DB 에 접근해서 실질적으로 insert, delete 등을 수행하는 메소드를 포함한다.<br/>
-- Database: Database Holder 를 포함하며, 앱에 영구 저장되는 데이터와 기본 연결을 위한 주 엑세스 지점이다. 또한 RoomDatabase 를 상속하는 추상 클래스여야 하며, 테이블과 버전을 정의하는 곳이다.
+
+- Entity: DB 안에 있는 테이블을 Java/Kotlin 클래스로 나타낸 것으로, 데이터 모델 클래스라고 볼 수 있다.
+
+- DAO(Database Access Object): DB 에 접근해서 실질적으로 insert, delete 등을 수행하는 메소드를 포함한다.
+
+- Database: RoomDatabase 를 상속하는 추상 클래스여야 하며, 테이블과 버전을 정의하는 곳이다.
 <br/>
 <br/>
 
