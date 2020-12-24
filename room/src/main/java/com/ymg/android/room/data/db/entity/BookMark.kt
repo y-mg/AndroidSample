@@ -11,7 +11,7 @@ import java.util.*
 
 
 
-@Entity(tableName = "bookmark")
+@Entity(tableName = "book")
 @TypeConverters(DateConverter::class)
 data class BookMark(
     @PrimaryKey(autoGenerate = true)

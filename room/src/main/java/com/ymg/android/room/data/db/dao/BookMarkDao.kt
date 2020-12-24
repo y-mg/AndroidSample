@@ -9,7 +9,7 @@ import com.ymg.android.room.data.db.entity.BookMark
 @Dao
 interface BookMarkDao {
 
-    @Query("SELECT * FROM bookmark ORDER BY created ASC")
+    @Query("SELECT * FROM book ORDER BY created ASC")
     fun findAll(): DataSource.Factory<Int, BookMark>
 
 
